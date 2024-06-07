@@ -1,32 +1,4 @@
-interface ImageData {
-  attribute_json: string;
-  bounding_box: {
-    height: number;
-    left: number;
-    top: number;
-    width: number;
-  };
-  image: string;
-  image_size: {
-    height: number;
-    width: number;
-  };
-  quality_text: {
-    BLUR: string;
-    BOUNDING_BOX_SIZE: string;
-    Detection_Option: string;
-    EXPOSURE: string;
-    GLASSES: string;
-    OCCLUSION: string;
-    POSE: string;
-    QUALITY_FOR_RECO: string;
-  };
-  system_text: {
-    Background_Removal_Error: string;
-    Detection_Error: string;
-    Session_Id: string;
-  };
-}
+import { ImageData } from "../types";
 const dummyData: ImageData = {
   attribute_json:
     '{"face_id": "0184724e-e1d1-4834-b2d8-341adf74d0c2", "face_rectangle": {"width": 57, "height": 57, "left": 92, "top": 59}, "face_landmarks": {"pupil_left": {"x": 107.2, "y": 75.3}, "pupil_right": {"x": 129.9, "y": 72.8}, "nose_tip": {"x": 124.3, "y": 90.0}, "mouth_left": {"x": 109.7, "y": 102.8}, "mouth_right": {"x": 132.1, "y": 100.8}, "eyebrow_left_outer": {"x": 95.4, "y": 72.5}, "eyebrow_left_inner": {"x": 112.6, "y": 68.0}, "eye_left_outer": {"x": 103.3, "y": 76.3}, "eye_left_top": {"x": 106.3, "y": 74.1}, "eye_left_bottom": {"x": 106.8, "y": 77.0}, "eye_left_inner": {"x": 110.4, "y": 75.0}, "eyebrow_right_inner": {"x": 126.0, "y": 65.8}, "eyebrow_right_outer": {"x": 139.6, "y": 65.4}, "eye_right_inner": {"x": 126.6, "y": 73.5}, "eye_right_top": {"x": 129.6, "y": 71.3}, "eye_right_bottom": {"x": 130.0, "y": 74.5}, "eye_right_outer": {"x": 133.0, "y": 72.4}, "nose_root_left": {"x": 116.5, "y": 75.5}, "nose_root_right": {"x": 123.6, "y": 74.6}, "nose_left_alar_top": {"x": 117.5, "y": 85.8}, "nose_right_alar_top": {"x": 128.0, "y": 85.1}, "nose_left_alar_out_tip": {"x": 114.4, "y": 91.4}, "nose_right_alar_out_tip": {"x": 132.4, "y": 89.9}, "upper_lip_top": {"x": 123.1, "y": 99.3}, "upper_lip_bottom": {"x": 123.7, "y": 102.1}, "under_lip_top": {"x": 123.9, "y": 103.9}, "under_lip_bottom": {"x": 124.6, "y": 107.5}}, "face_attributes": {"glasses": "noGlasses", "head_pose": {"roll": -4.3, "yaw": 25.5, "pitch": 5.0}, "occlusion": {"forehead_occluded": false, "eye_occluded": false, "mouth_occluded": false}, "blur": {"blur_level": "Low", "value": 0.0}, "exposure": {"exposure_level": "GoodExposure", "value": 0.62}, "quality_for_recognition": "Medium"}}',
@@ -62,6 +34,8 @@ const dummyData: ImageData = {
 
 async function fakeFetch(): Promise<ImageData> {
   console.log("!!!!*******Fake Fetching Data Success ******!!!!!");
+  dummyData.system_text.Detection_Error = "";
+  dummyData.system_text.Background_Removal_Error = "";
   // Create a new Promise
   return new Promise<{ ok: boolean; json: () => Promise<ImageData> }>(
     (resolve, reject) => {

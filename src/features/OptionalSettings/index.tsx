@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FormGroup,
   Select,
@@ -6,7 +5,10 @@ import {
   FormControl,
   MenuItem,
 } from "@mui/material";
+import { useImageContext } from "../../utils/context";
 const OptionalSettings = () => {
+  const { optionalSettings } = useImageContext().state;
+  console.log("optionalSettings:", optionalSettings);
   return (
     <FormGroup
       sx={{
@@ -22,9 +24,9 @@ const OptionalSettings = () => {
           labelId="detect_model_label"
           id="detect_model"
           label="Detection Model"
-          defaultValue={3}
+          value={optionalSettings.detectionModal}
         >
-          <MenuItem value={3}>Automatic</MenuItem>
+          <MenuItem value={0}>Automatic</MenuItem>
           <MenuItem value={2}>Dection_01</MenuItem>
           <MenuItem value={1}>Dection_03</MenuItem>
         </Select>
@@ -35,11 +37,11 @@ const OptionalSettings = () => {
           labelId="resize_to_label"
           id="resize_to"
           label="Resize To"
-          defaultValue={1}
+          value={optionalSettings.resizeTo}
         >
-          <MenuItem value={1}>Original</MenuItem>
-          <MenuItem value={2}>1920</MenuItem>
-          <MenuItem value={3}>1024</MenuItem>
+          <MenuItem value={0}>Original</MenuItem>
+          <MenuItem value={1}>1920</MenuItem>
+          <MenuItem value={2}>1024</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ mt: 2, width: "20%" }}>
@@ -48,11 +50,11 @@ const OptionalSettings = () => {
           labelId="jpeg_quality_label"
           id="jpeg_quality"
           label="JPEG Quality"
-          defaultValue={1}
+          value={optionalSettings.jpgQuality}
         >
-          <MenuItem value={1}>Original</MenuItem>
-          <MenuItem value={2}>95</MenuItem>
-          <MenuItem value={3}>75</MenuItem>
+          <MenuItem value={0}>Original</MenuItem>
+          <MenuItem value={1}>95</MenuItem>
+          <MenuItem value={2}>75</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ mt: 2, width: "20%" }}>
@@ -61,7 +63,7 @@ const OptionalSettings = () => {
           labelId="crop_ratio_label"
           id="crop_ratio"
           label="Crop Margin Ratio"
-          defaultValue={4}
+          value={optionalSettings.cropMarginRatio}
         >
           <MenuItem value={1}>None</MenuItem>
           <MenuItem value={2}>0.5</MenuItem>
